@@ -1,0 +1,42 @@
+﻿{{ define "main" }}
+<section class='hero'>
+  <div class='container'>
+    <div class='hero-content'>
+      <h1>{{ .Title }}</h1>
+      <p class='hero-subtitle'>{{ .Params.subtitle }}</p>
+      <div class='hero-cta'>
+        <a href='/contacto/' class='btn btn-primary'>Agendar Consulta</a>
+        <a href='tel:{{ .Site.Params.phone }}' class='btn btn-secondary'>Ligar Agora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class='problems'>
+  <div class='container'>
+    <h2>Reconhece Alguma Destas Situações?</h2>
+    <div class='problems-grid'>
+      <div class='problem-card'>
+        <h3> Dores nas Costas</h3>
+        <p>Acorda rígido e demora tempo a "desenferrujar"?</p>
+      </div>
+      <div class='problem-card'>
+        <h3> Stress Constante</h3>
+        <p>Sente os ombros sempre tensos?</p>
+      </div>
+      <div class='problem-card'>
+        <h3> Noites Mal Dormidas</h3>
+        <p>Não consegue relaxar completamente?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class='cta-section'>
+  <div class='container'>
+    <h2>Pronto para Viver Sem Dores?</h2>
+    <p>Consulta inicial gratuita e sem compromisso</p>
+    <a href='/contacto/' class='btn btn-accent'>Agendar Agora</a>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,52 @@
+baseURL = 'https://tratamentes.pt'
+defaultContentLanguage = 'pt'
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.pt]
+    languageName = 'Português'
+    weight = 1
+    title = 'TrataMentes - Massagem Terapêutica Lisboa e Cascais'
+    [languages.pt.params]
+      description = 'Massagem terapêutica profissional em Lisboa e Cascais. Mais de 20 anos de experiência.'
+      phone = '+351 937 543 312'
+      email = 'contato@tratamentes.pt'
+    [[languages.pt.menu.main]]
+      name = 'Início'
+      url = '/'
+      weight = 1
+    [[languages.pt.menu.main]]
+      name = 'Sobre'
+      url = '/sobre/'
+      weight = 2
+    [[languages.pt.menu.main]]
+      name = 'Serviços'
+      url = '/servicos/'
+      weight = 3
+    [[languages.pt.menu.main]]
+      name = 'Contacto'
+      url = '/contacto/'
+      weight = 4
+
+  [languages.en]
+    languageName = 'English'
+    weight = 2
+    title = 'TrataMentes - Therapeutic Massage Lisbon and Cascais'
+    [languages.en.params]
+      description = 'Professional therapeutic massage in Lisbon and Cascais. Over 20 years of experience.'
+    [[languages.en.menu.main]]
+      name = 'Home'
+      url = '/en/'
+      weight = 1
+    [[languages.en.menu.main]]
+      name = 'About'
+      url = '/en/about/'
+      weight = 2
+    [[languages.en.menu.main]]
+      name = 'Services'
+      url = '/en/services/'
+      weight = 3
+    [[languages.en.menu.main]]
+      name = 'Contact'
+      url = '/en/contact/'
+      weight = 4
