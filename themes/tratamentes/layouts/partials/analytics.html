@@ -1,0 +1,331 @@
+<!-- Analytics e Tracking - TrataMentes -->
+<!-- IMPORTANTE: Substitua os IDs pelos seus códigos reais -->
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  
+  // Configuração básica
+  gtag('config', 'GA_MEASUREMENT_ID', {
+    page_title: '{{ .Title }}',
+    page_location: '{{ .Permalink }}',
+    content_group1: '{{ .Section }}',
+    custom_map: {
+      'custom_parameter_1': 'page_type'
+    }
+  });
+  
+  // Eventos personalizados para TrataMentes
+  function trackBookingAttempt(location, service) {
+    gtag('event', 'booking_attempt', {
+      event_category: 'engagement',
+      event_label: location + ' - ' + service,
+      value: 1
+    });
+  }
+  
+  function trackPhoneCall() {
+    gtag('event', 'phone_call', {
+      event_category: 'contact',
+      event_label: 'header_phone',
+      value: 1
+    });
+  }
+  
+  function trackFormSubmission(form_name) {
+    gtag('event', 'form_submit', {
+      event_category: 'contact',
+      event_label: form_name,
+      value: 1
+    });
+  }
+</script>
+
+<!-- Facebook Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', 'FACEBOOK_PIXEL_ID');
+  fbq('track', 'PageView');
+  
+  // Eventos personalizados Facebook
+  function trackFBBookingAttempt(location, service) {
+    fbq('track', 'InitiateCheckout', {
+      content_name: 'Agendamento - ' + service,
+      content_category: 'Consulta',
+      value: 50.00,
+      currency: 'EUR'
+    });
+  }
+  
+  function trackFBPhoneCall() {
+    fbq('track', 'Contact', {
+      content_name: 'Phone Call',
+      content_category: 'Contact'
+    });
+  }
+  
+  function trackFBFormSubmission() {
+    fbq('track', 'Lead', {
+      content_name: 'Contact Form',
+      content_category: 'Lead Generation'
+    });
+  }
+</script>
+
+<!-- Facebook Pixel Noscript -->
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=FACEBOOK_PIXEL_ID&ev=PageView&noscript=1"/>
+</noscript>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+    
+    // Eventos personalizados Clarity
+    function trackClarityEvent(event_name, data) {
+      if (typeof clarity === 'function') {
+        clarity('event', event_name, data);
+      }
+    }
+</script>
+
+<!-- Google Tag Manager (Opcional - para gestão avançada) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM_CONTAINER_ID');</script>
+
+<!-- Tracking de Eventos Unificado -->
+<script>
+  // Função unificada para tracking de eventos
+  function trackEvent(eventName, data = {}) {
+    const { category, action, label, value, location, service } = data;
+    
+    // Google Analytics
+    if (typeof gtag === 'function') {
+      gtag('event', action || eventName, {
+        event_category: category || 'engagement',
+        event_label: label || '',
+        value: value || 1
+      });
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq === 'function') {
+      switch(eventName) {
+        case 'booking_attempt':
+          trackFBBookingAttempt(location, service);
+          break;
+        case 'phone_call':
+          trackFBPhoneCall();
+          break;
+        case 'form_submit':
+          trackFBFormSubmission();
+          break;
+        default:
+          fbq('track', 'CustomEvent', { event_name: eventName });
+      }
+    }
+    
+    // Microsoft Clarity
+    trackClarityEvent(eventName, data);
+    
+    // Console log para debug (remover em produção)
+    console.log('Event tracked:', eventName, data);
+  }
+  
+  // Auto-tracking de cliques em links importantes
+  document.addEventListener('DOMContentLoaded', function() {
+    // Tracking de cliques em telefone
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+      link.addEventListener('click', function() {
+        trackEvent('phone_call', {
+          category: 'contact',
+          action: 'phone_click',
+          label: this.href.replace('tel:', '')
+        });
+      });
+    });
+    
+    // Tracking de cliques em email
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('click', function() {
+        trackEvent('email_click', {
+          category: 'contact',
+          action: 'email_click',
+          label: this.href.replace('mailto:', '')
+        });
+      });
+    });
+    
+    // Tracking de scroll depth
+    let scrollDepthTracked = false;
+    window.addEventListener('scroll', function() {
+      const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      
+      if (scrollPercent >= 75 && !scrollDepthTracked) {
+        trackEvent('scroll_depth', {
+          category: 'engagement',
+          action: 'scroll_75_percent',
+          value: 75
+        });
+        scrollDepthTracked = true;
+      }
+    });
+    
+    // Tracking de tempo na página
+    let timeOnPage = 0;
+    const timeTracker = setInterval(function() {
+      timeOnPage += 30;
+      
+      // Track milestone times
+      if (timeOnPage === 60) { // 1 minuto
+        trackEvent('time_on_page', {
+          category: 'engagement',
+          action: 'time_1_minute',
+          value: 60
+        });
+      } else if (timeOnPage === 180) { // 3 minutos
+        trackEvent('time_on_page', {
+          category: 'engagement',
+          action: 'time_3_minutes',
+          value: 180
+        });
+      } else if (timeOnPage === 300) { // 5 minutos
+        trackEvent('time_on_page', {
+          category: 'engagement',
+          action: 'time_5_minutes',
+          value: 300
+        });
+        clearInterval(timeTracker);
+      }
+    }, 30000); // Check every 30 seconds
+    
+    // Clear timer when user leaves
+    window.addEventListener('beforeunload', function() {
+      clearInterval(timeTracker);
+    });
+  });
+  
+  // Função para tracking manual de agendamentos
+  window.trackBooking = function(location = '', service = '') {
+    trackEvent('booking_attempt', {
+      category: 'conversion',
+      action: 'booking_modal_open',
+      label: `${location} - ${service}`,
+      location: location,
+      service: service
+    });
+  };
+  
+  // Função para tracking de formulários
+  window.trackFormSubmit = function(formName) {
+    trackEvent('form_submit', {
+      category: 'lead',
+      action: 'form_submission',
+      label: formName
+    });
+  };
+</script>
+
+<!-- RGPD Compliance Notice -->
+<script>
+  // Verificar se o utilizador já aceitou cookies
+  function checkCookieConsent() {
+    return localStorage.getItem('cookieConsent') === 'accepted';
+  }
+  
+  // Mostrar aviso de cookies se necessário
+  function showCookieNotice() {
+    if (!checkCookieConsent()) {
+      // Criar e mostrar banner de cookies
+      const banner = document.createElement('div');
+      banner.id = 'cookie-banner';
+      banner.innerHTML = `
+        <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #2C5F63; color: white; padding: 1rem; z-index: 10000; text-align: center;">
+          <p style="margin: 0 0 1rem 0;">Este site utiliza cookies para melhorar a sua experiência e para análise de tráfego. 
+          <a href="/privacidade/" style="color: #E8C547;">Política de Privacidade</a></p>
+          <button onclick="acceptCookies()" style="background: #E8C547; color: #2C5F63; border: none; padding: 0.5rem 1rem; border-radius: 4px; margin-right: 1rem; cursor: pointer;">Aceitar</button>
+          <button onclick="rejectCookies()" style="background: transparent; color: white; border: 1px solid white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Rejeitar</button>
+        </div>
+      `;
+      document.body.appendChild(banner);
+    }
+  }
+  
+  // Aceitar cookies
+  function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    document.getElementById('cookie-banner').remove();
+    
+    // Ativar tracking apenas após consentimento
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted'
+      });
+    }
+  }
+  
+  // Rejeitar cookies
+  function rejectCookies() {
+    localStorage.setItem('cookieConsent', 'rejected');
+    document.getElementById('cookie-banner').remove();
+    
+    // Desativar tracking
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied'
+      });
+    }
+  }
+  
+  // Mostrar banner quando página carregar
+  document.addEventListener('DOMContentLoaded', showCookieNotice);
+</script>
+
+<!-- Instruções para Implementação -->
+<!--
+PARA IMPLEMENTAR:
+
+1. Substitua os seguintes IDs pelos seus códigos reais:
+   - GA_MEASUREMENT_ID: Seu ID do Google Analytics 4 (ex: G-XXXXXXXXXX)
+   - FACEBOOK_PIXEL_ID: Seu ID do Facebook Pixel (ex: 123456789012345)
+   - CLARITY_PROJECT_ID: Seu ID do Microsoft Clarity (ex: abcdefghij)
+   - GTM_CONTAINER_ID: Seu ID do Google Tag Manager (ex: GTM-XXXXXXX) - Opcional
+
+2. Teste os eventos:
+   - Abra as ferramentas de desenvolvedor
+   - Vá para a aba Console
+   - Interaja com o site (clique em telefone, abra modal de agendamento, etc.)
+   - Verifique se os eventos aparecem no console
+
+3. Verifique no Google Analytics:
+   - Vá para Relatórios > Eventos em tempo real
+   - Interaja com o site
+   - Confirme que os eventos aparecem
+
+4. Crie uma página de Política de Privacidade em /content/pt/privacidade/_index.md
+
+5. Para produção, remova ou comente a linha:
+   console.log('Event tracked:', eventName, data);
+-->
+

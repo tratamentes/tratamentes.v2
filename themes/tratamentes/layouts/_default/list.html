@@ -1,0 +1,109 @@
+{{ define "main" }}
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Breadcrumb para navegação -->
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Início</a></li>
+                <li class="is-active"><a href="#" aria-current="page">{{ .Title }}</a></li>
+            </ul>
+        </nav>
+
+        <!-- Cabeçalho da secção -->
+        <header class="section-header">
+            <h1 class="title is-1">{{ .Title }}</h1>
+            {{ if .Params.subtitle }}
+                <p class="subtitle is-3">{{ .Params.subtitle }}</p>
+            {{ end }}
+            {{ if .Description }}
+                <p class="section-description">{{ .Description }}</p>
+            {{ end }}
+        </header>
+
+        <!-- Conteúdo da secção -->
+        {{ if .Content }}
+        <div class="section-content">
+            {{ .Content }}
+        </div>
+        {{ end }}
+
+        <!-- Lista de páginas da secção -->
+        {{ if .Pages }}
+        <section class="section-pages">
+            <div class="columns is-multiline">
+                {{ range .Pages }}
+                <div class="column is-half-tablet is-one-third-desktop">
+                    <div class="card">
+                        {{ if .Params.image }}
+                        <div class="card-image">
+                            <figure class="image is-16by9">
+                                <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+                            </figure>
+                        </div>
+                        {{ end }}
+                        
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <h3 class="title is-4">
+                                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                    </h3>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                {{ if .Params.subtitle }}
+                                    <p class="subtitle is-6">{{ .Params.subtitle }}</p>
+                                {{ end }}
+                                
+                                {{ if .Summary }}
+                                    <p>{{ .Summary }}</p>
+                                {{ end }}
+                                
+                                <div class="tags">
+                                    {{ range .Params.tags }}
+                                        <span class="tag is-light">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <footer class="card-footer">
+                            <a href="{{ .RelPermalink }}" class="card-footer-item">
+                                Saber Mais
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="box has-background-primary-light">
+                <div class="has-text-centered">
+                    <h3 class="title is-4">Tem Dúvidas?</h3>
+                    <p class="subtitle is-6">Entre em contacto para esclarecimentos ou para agendar a sua consulta.</p>
+                    <div class="buttons is-centered">
+                        <a href="tel:+351937543312" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                            <span>+351 937 543 312</span>
+                        </a>
+                        <a href="/contacto/" class="button is-link">
+                            <span class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span>Contactar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{{ end }}
+

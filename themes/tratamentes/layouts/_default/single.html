@@ -1,0 +1,82 @@
+{{ define "main" }}
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Breadcrumb para navegação -->
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Início</a></li>
+                <li class="is-active"><a href="#" aria-current="page">{{ .Title }}</a></li>
+            </ul>
+        </nav>
+
+        <!-- Cabeçalho da página -->
+        <header class="page-header">
+            <h1 class="title is-1">{{ .Title }}</h1>
+            {{ if .Params.subtitle }}
+                <p class="subtitle is-3">{{ .Params.subtitle }}</p>
+            {{ end }}
+            {{ if .Description }}
+                <p class="page-description">{{ .Description }}</p>
+            {{ end }}
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main class="page-content">
+            {{ .Content }}
+        </main>
+
+        <!-- Navegação entre páginas -->
+        {{ if or .NextInSection .PrevInSection }}
+        <nav class="page-navigation">
+            <div class="columns">
+                <div class="column">
+                    {{ if .PrevInSection }}
+                        <a href="{{ .PrevInSection.RelPermalink }}" class="button is-light">
+                            <span class="icon">
+                                <i class="fas fa-arrow-left"></i>
+                            </span>
+                            <span>{{ .PrevInSection.Title }}</span>
+                        </a>
+                    {{ end }}
+                </div>
+                <div class="column has-text-right">
+                    {{ if .NextInSection }}
+                        <a href="{{ .NextInSection.RelPermalink }}" class="button is-light">
+                            <span>{{ .NextInSection.Title }}</span>
+                            <span class="icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </a>
+                    {{ end }}
+                </div>
+            </div>
+        </nav>
+        {{ end }}
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="box has-background-primary-light">
+                <div class="has-text-centered">
+                    <h3 class="title is-4">Pronto para Começar?</h3>
+                    <p class="subtitle is-6">Agende a sua consulta e dê o primeiro passo para uma vida sem dores.</p>
+                    <div class="buttons is-centered">
+                        <a href="tel:+351937543312" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                            <span>Ligar Agora</span>
+                        </a>
+                        <a href="/contacto/" class="button is-link">
+                            <span class="icon">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                            <span>Agendar Online</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{{ end }}
+
