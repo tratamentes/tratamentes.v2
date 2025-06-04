@@ -1,82 +1,31 @@
 {{ define "main" }}
-<div class="container">
-    <div class="content-wrapper">
-        <!-- Breadcrumb para navegação -->
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="/">Início</a></li>
-                <li class="is-active"><a href="#" aria-current="page">{{ .Title }}</a></li>
-            </ul>
-        </nav>
-
-        <!-- Cabeçalho da página -->
-        <header class="page-header">
-            <h1 class="title is-1">{{ .Title }}</h1>
-            {{ if .Params.subtitle }}
-                <p class="subtitle is-3">{{ .Params.subtitle }}</p>
-            {{ end }}
-            {{ if .Description }}
-                <p class="page-description">{{ .Description }}</p>
-            {{ end }}
-        </header>
-
-        <!-- Conteúdo principal -->
-        <main class="page-content">
-            {{ .Content }}
-        </main>
-
-        <!-- Navegação entre páginas -->
-        {{ if or .NextInSection .PrevInSection }}
-        <nav class="page-navigation">
-            <div class="columns">
-                <div class="column">
-                    {{ if .PrevInSection }}
-                        <a href="{{ .PrevInSection.RelPermalink }}" class="button is-light">
-                            <span class="icon">
-                                <i class="fas fa-arrow-left"></i>
-                            </span>
-                            <span>{{ .PrevInSection.Title }}</span>
-                        </a>
-                    {{ end }}
-                </div>
-                <div class="column has-text-right">
-                    {{ if .NextInSection }}
-                        <a href="{{ .NextInSection.RelPermalink }}" class="button is-light">
-                            <span>{{ .NextInSection.Title }}</span>
-                            <span class="icon">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                        </a>
-                    {{ end }}
-                </div>
-            </div>
-        </nav>
+<section class="section">
+  <div class="container">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <header style="text-align: center; margin-bottom: 3rem;">
+        <h1>{{ .Title }}</h1>
+        {{ if .Params.subtitle }}
+        <p style="font-size: var(--font-size-xl); color: var(--text-secondary); margin-top: 1rem;">
+          {{ .Params.subtitle }}
+        </p>
         {{ end }}
-
-        <!-- Call to Action -->
-        <section class="cta-section">
-            <div class="box has-background-primary-light">
-                <div class="has-text-centered">
-                    <h3 class="title is-4">Pronto para Começar?</h3>
-                    <p class="subtitle is-6">Agende a sua consulta e dê o primeiro passo para uma vida sem dores.</p>
-                    <div class="buttons is-centered">
-                        <a href="tel:+351937543312" class="button is-primary">
-                            <span class="icon">
-                                <i class="fas fa-phone"></i>
-                            </span>
-                            <span>Ligar Agora</span>
-                        </a>
-                        <a href="/contacto/" class="button is-link">
-                            <span class="icon">
-                                <i class="fas fa-calendar"></i>
-                            </span>
-                            <span>Agendar Online</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      </header>
+      
+      <div class="content">
+        {{ .Content }}
+      </div>
+      
+      {{ if .Params.cta }}
+      <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--background-light); border-radius: var(--radius-xl);">
+        <h3>{{ .Params.cta.title | default "Pronto para Começar?" }}</h3>
+        <p style="margin-bottom: 1.5rem;">{{ .Params.cta.description | default "Entre em contacto connosco hoje mesmo." }}</p>
+        <a href="{{ .Params.cta.url | default "/contacto/" }}" class="btn btn-primary">
+          {{ .Params.cta.button | default "Contactar Agora" }}
+        </a>
+      </div>
+      {{ end }}
     </div>
-</div>
+  </div>
+</section>
 {{ end }}
 

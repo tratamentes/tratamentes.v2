@@ -1,107 +1,28 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" dir="ltr">
+<html lang="{{ .Site.Language.Lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
     
     <!-- SEO Meta Tags -->
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta name="keywords" content="massagem terapêutica, Lisboa, Cascais, dores costas, stress, ansiedade, João Goulart">
-    <meta name="author" content="João Goulart - TrataMentes">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-    <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta property="og:image" content="{{ .Site.BaseURL }}/images/og-image.jpg">
-    <meta property="og:locale" content="pt_PT">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ .Permalink }}">
-    <meta property="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-    <meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta property="twitter:image" content="{{ .Site.BaseURL }}/images/og-image.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{{ .Permalink }}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="author" content="{{ .Site.Params.author }}">
     
     <!-- Preconnect para performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com">
     
-    <!-- Fonts - WCAG 2.2 Compliant -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Skip Link para acessibilidade -->
-    <style>
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #000;
-            color: #fff;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 9999;
-            border-radius: 4px;
-        }
-        .skip-link:focus {
-            top: 6px;
-        }
-    </style>
-    
-    <!-- Google Tag Manager - Sistema Principal -->
-    {{ partial "gtm-head.html" . }}
-    
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "MedicalBusiness",
-        "name": "TrataMentes",
-        "description": "{{ .Site.Params.description }}",
-        "url": "{{ .Site.BaseURL }}",
-        "telephone": "{{ .Site.Params.phone }}",
-        "email": "{{ .Site.Params.email }}",
-        "address": [
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "R. Braamcamp 88 3Esq",
-                "addressLocality": "Lisboa",
-                "postalCode": "1250-012",
-                "addressCountry": "PT"
-            },
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "Av. Eng. Adelino Amaro da Costa 599 A",
-                "addressLocality": "Cascais",
-                "postalCode": "2750-279",
-                "addressCountry": "PT"
-            }
-        ],
-        "priceRange": "€€",
-        "medicalSpecialty": "Massage Therapy"
-    }
-    </script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    {{ partial "gtm-body.html" . }}
-    
     <!-- Skip to main content link -->
     <a href="#main-content" class="skip-link">Saltar para o conteúdo principal</a>
     
@@ -109,7 +30,7 @@
     {{ partial "header.html" . }}
     
     <!-- Main Content -->
-    <main id="main-content" role="main" tabindex="-1">
+    <main id="main-content" role="main">
         {{ block "main" . }}{{ end }}
     </main>
     
@@ -118,9 +39,6 @@
     
     <!-- JavaScript -->
     <script src="/js/main.js" defer></script>
-    
-    <!-- RGPD Cookie Consent -->
-    {{ partial "cookie-consent.html" . }}
 </body>
 </html>
 

@@ -1,169 +1,89 @@
 ---
-title: "Contacto e Agendamento"
-description: "Entre em contacto para agendar a sua consulta de massagem terapêutica em Lisboa ou Cascais. Telefone, email e formulário de contacto disponíveis."
+title: 'Contacto'
+subtitle: 'Pronto para começar a sua jornada para uma vida sem dores?'
+description: 'Entre em contacto connosco para agendar a sua consulta inicial gratuita. Estamos aqui para ajudá-lo.'
 date: 2025-06-04
 draft: false
 ---
 
-# Contacto e Agendamento
+## Agende a Sua Consulta
 
-Estou aqui para ajudá-lo. Entre em contacto para agendar a sua consulta ou esclarecer qualquer dúvida sobre os tratamentos.
+**Consulta inicial gratuita** - Vamos conversar sobre as suas necessidades e descobrir juntos como posso ajudá-lo.
 
-## Formas de Contacto
+### Formas de Contacto
 
-### Telefone (Preferencial)
-**[+351 937 543 312](tel:+351937543312)**
+**📞 Telefone:** [+351 937 543 312](tel:+351937543312)  
+**✉️ Email:** [contato@tratamentes.pt](mailto:contato@tratamentes.pt)
 
-- **Horário de Atendimento:** Segunda a Sexta, 9h-19h
-- **Resposta:** Imediata durante horário de atendimento
-- **Ideal para:** Agendamentos urgentes e esclarecimentos rápidos
-
-### Email
-**[contato@tratamentes.pt](mailto:contato@tratamentes.pt)**
-
-- **Resposta:** Até 24 horas
-- **Ideal para:** Questões detalhadas e agendamentos com antecedência
-
-## Formulário de Contacto
-
-<form action="#" method="post" class="contact-form">
-    <div class="form-group">
-        <label for="nome">Nome Completo *</label>
-        <input type="text" id="nome" name="nome" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="telefone">Telefone *</label>
-        <input type="tel" id="telefone" name="telefone" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-    </div>
-    
-    <div class="form-group">
-        <label for="localizacao">Localização Preferida</label>
-        <select id="localizacao" name="localizacao">
-            <option value="">Selecione uma opção</option>
-            <option value="lisboa">Lisboa - WLM Clínica</option>
-            <option value="cascais">Cascais - Clínica Now</option>
-            <option value="indiferente">Indiferente</option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="tipo-consulta">Tipo de Consulta</label>
-        <select id="tipo-consulta" name="tipo-consulta">
-            <option value="">Selecione uma opção</option>
-            <option value="primeira">Primeira Consulta</option>
-            <option value="seguimento">Consulta de Seguimento</option>
-            <option value="informacoes">Apenas Informações</option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="mensagem">Mensagem</label>
-        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva brevemente o motivo da consulta ou as suas questões..."></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label class="checkbox-label">
-            <input type="checkbox" name="privacidade" required>
-            Li e aceito a <a href="/politica-privacidade/" target="_blank">Política de Privacidade</a> *
-        </label>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-</form>
+*Respondo normalmente no mesmo dia. Se ligar e não atender, deixe mensagem que retorno a chamada.*
 
 ## Localizações
 
 ### Lisboa - WLM Clínica de Medicina Integrativa
 
-**Morada:**  
+**📍 Morada:**  
 R. Braamcamp 88 3Esq  
-1250-012 Lisboa
+1250-012 Lisboa, Portugal
 
-**Contacto:**  
-📞 [+351 937 543 312](tel:+351937543312)  
-📧 [contato@tratamentes.pt](mailto:contato@tratamentes.pt)
+**🕒 Horários:**  
+Segunda a Sexta: 9h às 19h  
+Sábado: Sob marcação  
+Domingo: Fechado
 
-**Horários:**  
-Segunda a Sexta: 9h-19h  
-Sábado: Sob consulta  
-Domingo: Encerrado
-
-**Transportes:**  
-- **Metro:** Marquês de Pombal (Linhas Azul e Amarela)
-- **Autocarros:** Várias linhas na Av. da Liberdade
-- **Estacionamento:** Pago na zona
+**🚇 Transportes:**  
+- Metro: Marquês de Pombal (Linhas Azul e Amarela)
+- Autocarros: Várias linhas param na Av. da Liberdade
+- Estacionamento: Parque Marquês de Pombal
 
 ---
 
 ### Cascais - Clínica Now
 
-**Morada:**  
+**📍 Morada:**  
 Av. Eng. Adelino Amaro da Costa 599 A  
-2750-279 Cascais
+2750-279 Cascais, Portugal
 
-**Contacto:**  
-📞 [+351 937 543 312](tel:+351937543312)  
-📧 [contato@tratamentes.pt](mailto:contato@tratamentes.pt)
+**🕒 Horários:**  
+Segunda a Sexta: 9h às 18h  
+Sábado: 9h às 14h  
+Domingo: Fechado
 
-**Horários:**  
-Segunda a Sexta: 9h-19h  
-Sábado: Sob consulta  
-Domingo: Encerrado
-
-**Transportes:**  
-- **Comboio:** Linha de Cascais (Estação de Cascais)
-- **Autocarros:** Várias linhas urbanas
-- **Estacionamento:** Gratuito na zona
-
-## Política de Agendamento
-
-### Agendamentos
-- **Antecedência mínima:** 24 horas
-- **Confirmação:** Por telefone ou email
-- **Flexibilidade:** Horários adaptados às suas necessidades
-
-### Cancelamentos
-- **Prazo:** Até 24 horas antes da consulta
-- **Sem custos:** Cancelamentos dentro do prazo
-- **Reagendamentos:** Sem custos adicionais
-
-### Primeira Consulta
-- **Duração:** 60-90 minutos
-- **Chegada:** 10 minutos antes da hora marcada
-- **Documentos:** Não são necessários documentos específicos
+**🚗 Transportes:**  
+- Comboio: Linha de Cascais até Estação de Cascais
+- Autocarros: Várias linhas urbanas
+- Estacionamento: Gratuito no local
 
 ## Perguntas Frequentes
 
-### Como posso agendar?
-Pode agendar por telefone (+351 937 543 312) ou email (contato@tratamentes.pt). O telefone é a forma mais rápida.
+### Quanto custa uma consulta?
+A consulta inicial é **gratuita**. Os preços das sessões variam conforme a duração e localização. Contacte-me para valores atualizados.
 
-### Qual a antecedência necessária?
-Recomenda-se pelo menos 24 horas de antecedência, mas tentamos sempre acomodar pedidos urgentes.
+### Quanto tempo demora uma sessão?
+As sessões podem ser de 60 ou 90 minutos, dependendo das suas necessidades e disponibilidade.
 
-### Posso escolher a localização?
-Sim, atendo em ambas as localizações. Pode escolher a mais conveniente para si.
+### Preciso de prescrição médica?
+Não é necessária prescrição médica para massagem terapêutica. No entanto, se tiver alguma condição médica específica, é sempre bom informar.
 
-### E se precisar de cancelar?
-Sem problema. Basta contactar até 24 horas antes da consulta marcada.
+### Com que frequência devo fazer sessões?
+Depende das suas necessidades. Na consulta inicial, vamos discutir um plano personalizado para si.
 
-### Que informações devo fornecer?
-Nome, contacto telefónico e uma breve descrição do motivo da consulta são suficientes.
+### Que devo trazer para a primeira consulta?
+Apenas roupa confortável. Se tiver relatórios médicos relacionados com dores ou lesões, pode trazê-los.
 
-## Emergências
+## Política de Cancelamento
 
-Para situações de dor aguda ou urgentes:
-- **Contacte primeiro** o seu médico ou serviços de urgência
-- **Depois** entre em contacto comigo para apoio complementar
+- **24 horas de antecedência:** Cancelamento gratuito
+- **Menos de 24 horas:** Pode ser cobrada taxa de cancelamento
+- **Emergências:** Sempre compreendidas, contacte-me
+
+## Compromisso de Qualidade
+
+- **Pontualidade:** Respeito sempre os horários marcados
+- **Profissionalismo:** Ambiente seguro e profissional
+- **Confidencialidade:** Toda a informação é tratada com sigilo
+- **Higiene:** Protocolos rigorosos de limpeza e desinfeção
 
 ---
 
-**Nota de Privacidade:** Todos os dados pessoais são tratados com total confidencialidade, em conformidade com o RGPD. As informações fornecidas são utilizadas exclusivamente para fins de agendamento e acompanhamento terapêutico.
-
-**Aviso Legal:** Os tratamentos de massagem terapêutica são complementares e não substituem o acompanhamento médico. Para condições de saúde específicas, recomenda-se sempre consulta médica prévia.
+**Pronto para começar?** Ligue agora ou envie um email. Estou aqui para ajudá-lo a viver melhor!
 

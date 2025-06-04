@@ -1,60 +1,32 @@
 <footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 class="footer-title">{{ .Site.Title }}</h3>
-                <p class="footer-description">{{ .Site.Params.description }}</p>
-                <div class="footer-contact">
-                    <p>
-                        <span class="contact-icon">📞</span>
-                        <a href="tel:{{ .Site.Params.phone }}">{{ .Site.Params.phone }}</a>
-                    </p>
-                    <p>
-                        <span class="contact-icon">📧</span>
-                        <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
-                    </p>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3 class="footer-title">Localizações</h3>
-                <div class="location-item">
-                    <h4>{{ .Site.Params.locations.lisboa.name }}</h4>
-                    <p>{{ .Site.Params.locations.lisboa.address }}</p>
-                </div>
-                <div class="location-item">
-                    <h4>{{ .Site.Params.locations.cascais.name }}</h4>
-                    <p>{{ .Site.Params.locations.cascais.address }}</p>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3 class="footer-title">Navegação</h3>
-                <ul class="footer-nav">
-                    {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-                    {{ end }}
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>{{ .Site.Title }}</h3>
+        <p>{{ .Site.Params.description }}</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>📞 {{ .Site.Params.phone }}</p>
+        <p>✉️ {{ .Site.Params.email }}</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Localizações</h3>
+        <p><strong>Lisboa</strong><br>
+        WLM - Clínica de Medicina Integrativa<br>
+        R. Braamcamp 88 3Esq, 1250-012 Lisboa</p>
         
-        <div class="footer-bottom">
-            <div class="footer-legal">
-                <p>&copy; {{ now.Year }} {{ .Site.Title }}. Todos os direitos reservados.</p>
-                <div class="legal-links">
-                    <a href="/politica-privacidade/">Política de Privacidade</a>
-                    <a href="/termos-uso/">Termos de Uso</a>
-                </div>
-            </div>
-            
-            <div class="footer-disclaimer">
-                <p><small>
-                    <strong>Aviso Legal:</strong> Os tratamentos de massagem terapêutica podem ajudar no alívio de sintomas, 
-                    mas não substituem o acompanhamento médico. Para condições de saúde específicas, 
-                    recomenda-se sempre consulta médica prévia.
-                </small></p>
-            </div>
-        </div>
+        <p><strong>Cascais</strong><br>
+        Clínica Now - Gabinete João Goulart<br>
+        Av. Eng. Adelino Amaro da Costa 599 A, 2750-279 Cascais</p>
+      </div>
     </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {{ now.Year }} {{ .Site.Title }}. Todos os direitos reservados.</p>
+    </div>
+  </div>
 </footer>
 

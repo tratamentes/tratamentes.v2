@@ -1,38 +1,23 @@
-baseURL = 'https://tratamentes.pt'
+baseURL = 'http://localhost:1313'
 defaultContentLanguage = 'pt'
 defaultContentLanguageInSubdir = false
 
 title = 'TrataMentes - Massagem Terapêutica Lisboa e Cascais'
+theme = 'tratamentes'
 
 [params]
   description = 'Massagem terapêutica profissional em Lisboa e Cascais. Mais de 20 anos de experiência no alívio de dores crónicas, stress e problemas de sono.'
   phone = '+351 937 543 312'
   email = 'contato@tratamentes.pt'
-  
-  # Google Tag Manager (Sistema Principal)
-  gtm_id = 'GTM-XXXXXXX'
-  
-  # IDs de Tracking (configurar via GTM)
-  # google_analytics = 'G-XXXXXXXXXX'
-  # facebook_pixel = 'XXXXXXXXXX'
-  # microsoft_clarity = 'XXXXXXXXXX'
-  
-  # Configurações de SEO
   author = 'João Goulart'
-  keywords = 'massagem terapêutica, Lisboa, Cascais, dores costas, stress, ansiedade, sono, João Goulart'
   
-  # Configurações de Acessibilidade
-  accessibility_statement = '/acessibilidade/'
-  privacy_policy = '/privacidade/'
-  terms_of_service = '/termos/'
+  # Google Tag Manager
+  gtm_id = 'GTM-XXXXXXX'
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-  [markup.highlight]
-    style = 'github'
-    lineNos = false
 
 [[menu.main]]
   name = 'Início'
@@ -53,47 +38,4 @@ title = 'TrataMentes - Massagem Terapêutica Lisboa e Cascais'
   name = 'Contacto'
   url = '/contacto/'
   weight = 4
-
-# Menu Footer
-[[menu.footer]]
-  name = 'Política de Privacidade'
-  url = '/privacidade/'
-  weight = 1
-
-[[menu.footer]]
-  name = 'Termos de Serviço'
-  url = '/termos/'
-  weight = 2
-
-[[menu.footer]]
-  name = 'Declaração de Acessibilidade'
-  url = '/acessibilidade/'
-  weight = 3
-
-# Configurações de Output
-[outputs]
-  home = ['HTML', 'RSS', 'JSON']
-  page = ['HTML']
-  section = ['HTML', 'RSS']
-
-# Configurações de Minificação
-[minify]
-  disableCSS = false
-  disableHTML = false
-  disableJS = false
-  disableJSON = false
-  disableSVG = false
-  disableXML = false
-
-# Configurações de Imagem
-[imaging]
-  quality = 85
-  resampleFilter = 'Lanczos'
-
-# Configurações de Privacidade (RGPD)
-[privacy]
-  [privacy.googleAnalytics]
-    disable = true  # Usar GTM em vez de GA direto
-  [privacy.youtube]
-    privacyEnhanced = true
 

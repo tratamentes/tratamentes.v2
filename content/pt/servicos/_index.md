@@ -1,130 +1,89 @@
 ---
-title: "Como Posso Ajudá-lo?"
-description: "Serviços de massagem terapêutica especializados em dores nas costas, stress, tensão muscular e problemas de sono. Tratamentos personalizados em Lisboa e Cascais."
+title: 'Serviços de Massagem Terapêutica'
+subtitle: 'Soluções personalizadas para o seu bem-estar'
+description: 'Descubra os nossos serviços de massagem terapêutica especializados no tratamento de dores crónicas, stress e problemas de mobilidade.'
 date: 2025-06-04
 draft: false
+cta:
+  title: 'Qual o Melhor Serviço para Si?'
+  description: 'Não tem certeza? Agende uma consulta gratuita e vamos descobrir juntos.'
+  url: '/contacto/'
+  button: 'Consulta Gratuita'
 ---
 
-# Serviços de Massagem Terapêutica
+## Como Posso Ajudá-lo
 
-Ofereço tratamentos especializados e personalizados para ajudá-lo a encontrar alívio para os seus sintomas específicos. Cada sessão é adaptada às suas necessidades individuais.
+Com mais de 20 anos de experiência, desenvolvi uma abordagem personalizada que combina diferentes técnicas para tratar as suas necessidades específicas.
 
-## Áreas de Especialização
+### Áreas de Especialização
 
-### [Dores nas Costas e Pescoço](/servicos/dores-costas-pescoco/)
-Tratamento especializado para alívio de dores lombares, cervicais e tensões posturais.
+**🔸 Dores Crónicas**
+- Dores nas costas persistentes
+- Tensões no pescoço e ombros
+- Rigidez muscular matinal
+- Limitações de movimento
 
-**Indicado para:**
-- Dores lombares crónicas
-- Tensões cervicais
-- Rigidez matinal
-- Desconforto por má postura
-- Dores relacionadas com trabalho de escritório
-
-### [Stress e Tensão Muscular](/servicos/stress-tensao/)
-Técnicas de relaxamento profundo para redução do stress e alívio de tensões musculares.
-
-**Indicado para:**
-- Stress crónico
-- Tensão nos ombros
+**💪 Stress e Tensão**
+- Tensão muscular por stress
 - Dores de cabeça tensionais
-- Ansiedade
-- Fadiga mental
+- Ansiedade física
+- Fadiga crónica
 
-### [Problemas de Sono e Relaxamento](/servicos/sono-relaxamento/)
-Tratamentos focados na promoção do relaxamento e melhoria da qualidade do sono.
-
-**Indicado para:**
-- Insónia
-- Sono não reparador
+**😴 Problemas de Sono**
 - Dificuldade em relaxar
-- Agitação noturna
-- Stress acumulado
+- Tensão que impede o descanso
+- Acordar com dores
+- Sono não reparador
 
-## Abordagem Terapêutica
+**🏃 Recuperação e Mobilidade**
+- Recuperação pós-lesão
+- Melhoria da flexibilidade
+- Preparação para atividade física
+- Manutenção da saúde muscular
 
-### Avaliação Inicial
-Cada novo paciente recebe uma avaliação completa que inclui:
-- **Historial detalhado** dos sintomas
-- **Análise postural** básica
-- **Identificação** de fatores contribuintes
-- **Definição** de objetivos terapêuticos
+## A Minha Abordagem
+
+### Consulta Inicial (Gratuita)
+- Avaliação das suas necessidades
+- Discussão do seu histórico
+- Plano de tratamento personalizado
+- Esclarecimento de todas as dúvidas
 
 ### Tratamento Personalizado
-Com base na avaliação, desenvolvo um plano de tratamento que pode incluir:
-- **Massagem terapêutica** específica
-- **Técnicas de relaxamento** profundo
-- **Mobilização** suave de articulações
-- **Conselhos posturais** e de estilo de vida
+- Técnicas adaptadas ao seu caso
+- Sessões de 60 ou 90 minutos
+- Acompanhamento da evolução
+- Ajustes conforme necessário
 
-### Acompanhamento
-- **Monitorização** da evolução
-- **Ajustes** no plano de tratamento
-- **Educação** para prevenção
-- **Suporte** contínuo
-
-## Duração e Frequência
-
-### Primeira Consulta
-- **Duração:** 60-90 minutos
-- **Inclui:** Avaliação + primeira sessão de tratamento
-
-### Sessões de Acompanhamento
-- **Duração:** 60 minutos
-- **Frequência:** Conforme necessidades individuais
-- **Flexibilidade:** Horários adaptados à sua disponibilidade
+### Seguimento e Cuidados
+- Conselhos para casa
+- Exercícios complementares
+- Plano de manutenção
+- Suporte contínuo
 
 ## Localizações e Horários
 
 ### Lisboa - WLM Clínica de Medicina Integrativa
 **Morada:** R. Braamcamp 88 3Esq, 1250-012 Lisboa  
-**Horários:** Segunda a Sexta, 9h-19h  
-**Telefone:** +351 937 543 312
+**Horários:** Segunda a Sexta, 9h às 19h
 
 ### Cascais - Clínica Now
 **Morada:** Av. Eng. Adelino Amaro da Costa 599 A, 2750-279 Cascais  
-**Horários:** Segunda a Sexta, 9h-19h  
-**Telefone:** +351 937 543 312
+**Horários:** Segunda a Sábado, 9h às 18h
 
 ## Preços e Condições
 
-### Consulta Inicial
-- **Avaliação + Primeira Sessão:** Consultar valores
-- **Inclui:** Plano de tratamento personalizado
+- **Consulta inicial:** Gratuita (30 minutos)
+- **Sessão de 60 minutos:** Consultar valores
+- **Sessão de 90 minutos:** Consultar valores
+- **Pacotes de tratamento:** Descontos disponíveis
 
-### Sessões de Acompanhamento
-- **Sessão Individual:** Consultar valores
-- **Pacotes:** Disponíveis para tratamentos regulares
+*Os preços podem variar conforme a localização e tipo de tratamento necessário.*
 
-*Os preços podem variar conforme a complexidade do caso e duração da sessão.*
+## Importante Saber
 
-## Agendar Consulta
-
-Para agendar a sua consulta ou esclarecer dúvidas:
-
-**Telefone:** [+351 937 543 312](tel:+351937543312)  
-**Email:** [contato@tratamentes.pt](mailto:contato@tratamentes.pt)
-
-### Política de Cancelamento
-- **Cancelamentos:** Até 24h antes da consulta
-- **Reagendamentos:** Sem custos adicionais
-- **Faltas:** Podem ser cobradas
-
-## Perguntas Frequentes
-
-### É necessário prescrição médica?
-Não é necessário, mas recomenda-se sempre informar o seu médico sobre tratamentos complementares.
-
-### Quantas sessões são necessárias?
-Varia conforme o caso. Muitas pessoas sentem melhorias já na primeira sessão, mas tratamentos regulares tendem a proporcionar benefícios mais duradouros.
-
-### Há contraindicações?
-Sim, existem algumas situações onde a massagem pode não ser recomendada. Estas são sempre avaliadas na consulta inicial.
-
-### Que roupa devo usar?
-Roupa confortável. Será fornecida roupa adequada para o tratamento se necessário.
-
----
-
-**Aviso Legal:** Os tratamentos de massagem terapêutica podem ajudar significativamente no alívio de sintomas e melhoria da qualidade de vida. No entanto, não substituem o acompanhamento médico. Para condições de saúde específicas, sintomas persistentes ou agravamento de sintomas, recomenda-se sempre consulta médica. Em alguns casos, pode ser benéfico um acompanhamento interdisciplinar (médico, fisioterapeuta, psicólogo) para otimizar os resultados do tratamento.
+- Cada tratamento é personalizado às suas necessidades
+- Algumas condições podem necessitar de acompanhamento médico complementar
+- Não fazemos garantias de resultados, mas comprometemo-nos com o melhor cuidado possível
+- Trabalhamos sempre em colaboração com outros profissionais de saúde quando necessário
 
