@@ -1,0 +1,79 @@
+{{/* Google Tag Manager - Sistema Principal de Tracking */}}
+{{- $gtm_id := site.Params.gtm_id | default "GTM-XXXXXXX" -}}
+
+{{- if $gtm_id -}}
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ $gtm_id }}');</script>
+<!-- End Google Tag Manager -->
+
+<!-- DataLayer Events para TrataMentes -->
+<script>
+window.dataLayer = window.dataLayer || [];
+
+// Função para enviar eventos personalizados
+function gtmEvent(eventName, parameters = {}) {
+    window.dataLayer.push({
+        event: eventName,
+        ...parameters
+    });
+}
+
+// Eventos automáticos
+document.addEventListener('DOMContentLoaded', function() {
+    // Página carregada
+    gtmEvent('page_loaded', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname
+    });
+    
+    // Tracking de cliques em botões CTA
+    document.querySelectorAll('.btn-primary, .btn-cta, .cta-button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            gtmEvent('cta_click', {
+                button_text: this.textContent.trim(),
+                button_location: this.getAttribute('href') || this.getAttribute('data-action'),
+                page_section: this.closest('section')?.className || 'unknown'
+            });
+        });
+    });
+    
+    // Tracking de cliques em telefone
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(tel) {
+        tel.addEventListener('click', function() {
+            gtmEvent('phone_click', {
+                phone_number: this.getAttribute('href').replace('tel:', ''),
+                page_location: window.location.pathname
+            });
+        });
+    });
+    
+    // Tracking de formulários
+    document.querySelectorAll('form').forEach(function(form) {
+        form.addEventListener('submit', function() {
+            gtmEvent('form_submit', {
+                form_id: this.id || 'unknown',
+                form_name: this.getAttribute('name') || 'contact_form'
+            });
+        });
+    });
+    
+    // Tracking de scroll profundo (75%)
+    let scrollTracked = false;
+    window.addEventListener('scroll', function() {
+        if (!scrollTracked && (window.scrollY / (document.body.scrollHeight - window.innerHeight)) > 0.75) {
+            scrollTracked = true;
+            gtmEvent('scroll_deep', {
+                scroll_percentage: 75,
+                page_path: window.location.pathname
+            });
+        }
+    });
+});
+</script>
+{{- end -}}
+

@@ -1,0 +1,499 @@
+<!-- Google Tag Manager - TrataMentes (PRIORITÁRIO) -->
+<!-- IMPORTANTE: Substitua GTM_CONTAINER_ID pelo seu ID real -->
+
+<!-- GTM Head Script -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM_CONTAINER_ID');
+</script>
+
+<!-- Enhanced DataLayer para TrataMentes -->
+<script>
+window.dataLayer = window.dataLayer || [];
+
+// Configuração inicial da página
+dataLayer.push({
+  'event': 'page_view',
+  'page_title': '{{ .Title }}',
+  'page_location': '{{ .Permalink }}',
+  'page_path': '{{ .RelPermalink }}',
+  'content_group1': '{{ .Section }}',
+  'content_group2': '{{ .Type }}',
+  'site_language': '{{ .Site.Language.Lang }}',
+  'site_name': '{{ .Site.Title }}',
+  'page_type': '{{ if .IsHome }}homepage{{ else if .IsPage }}page{{ else if .IsSection }}section{{ else }}other{{ end }}',
+  'business_location': 'Lisboa_Cascais',
+  'service_category': 'massagem_terapeutica'
+});
+
+// Função unificada para tracking de eventos
+function gtmTrackEvent(eventName, eventData = {}) {
+  const defaultData = {
+    'event': eventName,
+    'timestamp': new Date().toISOString(),
+    'user_agent': navigator.userAgent,
+    'page_url': window.location.href,
+    'page_title': document.title
+  };
+  
+  const finalData = Object.assign(defaultData, eventData);
+  
+  // Push para dataLayer
+  dataLayer.push(finalData);
+  
+  // Debug log (remover em produção)
+  console.log('GTM Event:', eventName, finalData);
+}
+
+// Eventos específicos para TrataMentes
+window.tratamentesEvents = {
+  // Agendamento de consulta
+  bookingAttempt: function(location = '', service = '', step = 'modal_open') {
+    gtmTrackEvent('booking_attempt', {
+      'event_category': 'conversion',
+      'event_action': 'booking_' + step,
+      'event_label': location + '_' + service,
+      'booking_location': location,
+      'booking_service': service,
+      'booking_step': step,
+      'conversion_value': 50,
+      'currency': 'EUR'
+    });
+  },
+  
+  // Contacto telefónico
+  phoneCall: function(source = 'header') {
+    gtmTrackEvent('phone_call', {
+      'event_category': 'contact',
+      'event_action': 'phone_click',
+      'event_label': source,
+      'contact_method': 'phone',
+      'contact_source': source,
+      'phone_number': '+351937543312'
+    });
+  },
+  
+  // Submissão de formulário
+  formSubmit: function(formName, formData = {}) {
+    gtmTrackEvent('form_submit', {
+      'event_category': 'lead',
+      'event_action': 'form_submission',
+      'event_label': formName,
+      'form_name': formName,
+      'form_data': formData,
+      'lead_source': 'website_form'
+    });
+  },
+  
+  // Visualização de serviços
+  serviceView: function(serviceName) {
+    gtmTrackEvent('service_view', {
+      'event_category': 'engagement',
+      'event_action': 'service_page_view',
+      'event_label': serviceName,
+      'service_name': serviceName,
+      'content_type': 'service_page'
+    });
+  },
+  
+  // Scroll depth
+  scrollDepth: function(percentage) {
+    gtmTrackEvent('scroll_depth', {
+      'event_category': 'engagement',
+      'event_action': 'scroll_' + percentage + '_percent',
+      'event_label': percentage + '%',
+      'scroll_percentage': percentage,
+      'engagement_type': 'scroll'
+    });
+  },
+  
+  // Tempo na página
+  timeOnPage: function(seconds) {
+    gtmTrackEvent('time_on_page', {
+      'event_category': 'engagement',
+      'event_action': 'time_' + Math.floor(seconds/60) + '_minutes',
+      'event_label': seconds + 's',
+      'time_seconds': seconds,
+      'engagement_type': 'time'
+    });
+  },
+  
+  // Clique em testemunhos
+  testimonialInteraction: function(action, testimonialId = '') {
+    gtmTrackEvent('testimonial_interaction', {
+      'event_category': 'engagement',
+      'event_action': 'testimonial_' + action,
+      'event_label': testimonialId,
+      'testimonial_id': testimonialId,
+      'interaction_type': action
+    });
+  },
+  
+  // Erro de carregamento
+  loadError: function(errorType, errorDetails = '') {
+    gtmTrackEvent('load_error', {
+      'event_category': 'error',
+      'event_action': errorType + '_error',
+      'event_label': errorDetails,
+      'error_type': errorType,
+      'error_details': errorDetails
+    });
+  },
+  
+  // Performance metrics
+  performanceMetric: function(metricName, value, unit = 'ms') {
+    gtmTrackEvent('performance_metric', {
+      'event_category': 'performance',
+      'event_action': metricName,
+      'event_label': value + unit,
+      'metric_name': metricName,
+      'metric_value': value,
+      'metric_unit': unit
+    });
+  }
+};
+
+// Auto-tracking de eventos comuns
+document.addEventListener('DOMContentLoaded', function() {
+  // Tracking de cliques em telefone
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      const source = this.closest('header') ? 'header' : 
+                    this.closest('footer') ? 'footer' : 'content';
+      tratamentesEvents.phoneCall(source);
+    });
+  });
+  
+  // Tracking de cliques em email
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      gtmTrackEvent('email_click', {
+        'event_category': 'contact',
+        'event_action': 'email_click',
+        'event_label': this.href.replace('mailto:', ''),
+        'contact_method': 'email'
+      });
+    });
+  });
+  
+  // Tracking de scroll depth
+  let scrollDepthTracked = {25: false, 50: false, 75: false, 90: false};
+  window.addEventListener('scroll', function() {
+    const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    
+    Object.keys(scrollDepthTracked).forEach(function(depth) {
+      if (scrollPercent >= depth && !scrollDepthTracked[depth]) {
+        tratamentesEvents.scrollDepth(depth);
+        scrollDepthTracked[depth] = true;
+      }
+    });
+  });
+  
+  // Tracking de tempo na página
+  let timeOnPage = 0;
+  const timeTracker = setInterval(function() {
+    timeOnPage += 30;
+    
+    // Track milestone times
+    if ([60, 180, 300, 600].includes(timeOnPage)) {
+      tratamentesEvents.timeOnPage(timeOnPage);
+    }
+    
+    // Stop tracking after 10 minutes
+    if (timeOnPage >= 600) {
+      clearInterval(timeTracker);
+    }
+  }, 30000);
+  
+  // Clear timer when user leaves
+  window.addEventListener('beforeunload', function() {
+    clearInterval(timeTracker);
+    
+    // Final time tracking
+    gtmTrackEvent('page_exit', {
+      'event_category': 'engagement',
+      'event_action': 'page_exit',
+      'event_label': timeOnPage + 's',
+      'total_time_seconds': timeOnPage
+    });
+  });
+  
+  // Performance tracking
+  window.addEventListener('load', function() {
+    // Wait for all resources to load
+    setTimeout(function() {
+      if (window.performance && window.performance.timing) {
+        const timing = window.performance.timing;
+        const loadTime = timing.loadEventEnd - timing.navigationStart;
+        const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+        const firstPaint = timing.responseStart - timing.navigationStart;
+        
+        tratamentesEvents.performanceMetric('page_load_time', loadTime);
+        tratamentesEvents.performanceMetric('dom_ready_time', domReady);
+        tratamentesEvents.performanceMetric('first_paint_time', firstPaint);
+      }
+    }, 1000);
+  });
+  
+  // Error tracking
+  window.addEventListener('error', function(e) {
+    tratamentesEvents.loadError('javascript', e.message + ' at ' + e.filename + ':' + e.lineno);
+  });
+  
+  // Unhandled promise rejection tracking
+  window.addEventListener('unhandledrejection', function(e) {
+    tratamentesEvents.loadError('promise_rejection', e.reason);
+  });
+});
+
+// Enhanced ecommerce tracking para agendamentos
+window.gtmEcommerce = {
+  // Início do processo de agendamento
+  beginCheckout: function(location, service, value = 50) {
+    gtmTrackEvent('begin_checkout', {
+      'event_category': 'ecommerce',
+      'currency': 'EUR',
+      'value': value,
+      'items': [{
+        'item_id': service,
+        'item_name': 'Consulta ' + service,
+        'item_category': 'Massagem Terapêutica',
+        'item_variant': location,
+        'price': value,
+        'quantity': 1
+      }]
+    });
+  },
+  
+  // Agendamento completado
+  purchase: function(location, service, appointmentId, value = 50) {
+    gtmTrackEvent('purchase', {
+      'event_category': 'ecommerce',
+      'transaction_id': appointmentId,
+      'currency': 'EUR',
+      'value': value,
+      'items': [{
+        'item_id': service,
+        'item_name': 'Consulta ' + service,
+        'item_category': 'Massagem Terapêutica',
+        'item_variant': location,
+        'price': value,
+        'quantity': 1
+      }]
+    });
+  }
+};
+
+// Consent Management para RGPD
+window.gtmConsent = {
+  // Configuração inicial (denied por padrão)
+  init: function() {
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'functionality_storage': 'granted',
+      'security_storage': 'granted'
+    });
+  },
+  
+  // Aceitar cookies
+  accept: function() {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted'
+    });
+    
+    gtmTrackEvent('consent_granted', {
+      'event_category': 'consent',
+      'event_action': 'accept_all',
+      'consent_type': 'all'
+    });
+  },
+  
+  // Rejeitar cookies
+  reject: function() {
+    gtag('consent', 'update', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied'
+    });
+    
+    gtmTrackEvent('consent_denied', {
+      'event_category': 'consent',
+      'event_action': 'reject_all',
+      'consent_type': 'none'
+    });
+  }
+};
+
+// Inicializar consent management
+if (typeof gtag === 'function') {
+  gtmConsent.init();
+}
+</script>
+
+<!-- GTM NoScript (para browsers sem JavaScript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM_CONTAINER_ID"
+          height="0" width="0" style="display:none;visibility:hidden"
+          title="Google Tag Manager"></iframe>
+</noscript>
+
+<!-- RGPD Cookie Banner -->
+<script>
+// Verificar consentimento existente
+function checkCookieConsent() {
+  return localStorage.getItem('gtm_consent') === 'granted';
+}
+
+// Mostrar banner de cookies
+function showCookieBanner() {
+  if (!checkCookieConsent() && localStorage.getItem('gtm_consent') !== 'denied') {
+    const banner = document.createElement('div');
+    banner.id = 'gtm-cookie-banner';
+    banner.innerHTML = `
+      <div style="position: fixed; bottom: 0; left: 0; right: 0; background: #2C5F63; color: white; padding: 1rem; z-index: 10000; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div style="flex: 1; min-width: 300px;">
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+              🍪 Utilizamos cookies para melhorar a sua experiência, analisar o tráfego e personalizar conteúdo. 
+              <a href="/privacidade/" style="color: #E8C547; text-decoration: underline;">Política de Privacidade</a>
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button onclick="acceptAllCookies()" 
+                    style="background: #E8C547; color: #2C5F63; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem;">
+              Aceitar Todos
+            </button>
+            <button onclick="rejectAllCookies()" 
+                    style="background: transparent; color: white; border: 1px solid white; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+              Rejeitar
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+  }
+}
+
+// Aceitar todos os cookies
+function acceptAllCookies() {
+  localStorage.setItem('gtm_consent', 'granted');
+  gtmConsent.accept();
+  removeCookieBanner();
+}
+
+// Rejeitar cookies
+function rejectAllCookies() {
+  localStorage.setItem('gtm_consent', 'denied');
+  gtmConsent.reject();
+  removeCookieBanner();
+}
+
+// Remover banner
+function removeCookieBanner() {
+  const banner = document.getElementById('gtm-cookie-banner');
+  if (banner) {
+    banner.remove();
+  }
+}
+
+// Mostrar banner quando página carregar
+document.addEventListener('DOMContentLoaded', function() {
+  // Aplicar consentimento salvo
+  const savedConsent = localStorage.getItem('gtm_consent');
+  if (savedConsent === 'granted') {
+    gtmConsent.accept();
+  } else if (savedConsent === 'denied') {
+    gtmConsent.reject();
+  } else {
+    // Mostrar banner se não há consentimento salvo
+    setTimeout(showCookieBanner, 1000);
+  }
+});
+</script>
+
+<!-- Instruções de Configuração GTM -->
+<!--
+CONFIGURAÇÃO NO GOOGLE TAG MANAGER:
+
+1. CRIAR CONTAINER:
+   - Vá para https://tagmanager.google.com/
+   - Crie um novo container para o domínio
+   - Substitua GTM_CONTAINER_ID pelo ID real (ex: GTM-XXXXXXX)
+
+2. CONFIGURAR TAGS PRINCIPAIS:
+
+   A) Google Analytics 4:
+   - Tag Type: Google Analytics: GA4 Configuration
+   - Measurement ID: Seu GA4 ID (G-XXXXXXXXXX)
+   - Trigger: All Pages
+
+   B) Facebook Pixel:
+   - Tag Type: Custom HTML
+   - HTML: Código do Facebook Pixel
+   - Trigger: Consent Granted
+
+   C) Microsoft Clarity:
+   - Tag Type: Custom HTML  
+   - HTML: Código do Clarity
+   - Trigger: All Pages
+
+3. CONFIGURAR TRIGGERS:
+
+   A) Booking Attempt:
+   - Trigger Type: Custom Event
+   - Event Name: booking_attempt
+   - Fire On: All Custom Events
+
+   B) Phone Call:
+   - Trigger Type: Custom Event
+   - Event Name: phone_call
+   - Fire On: All Custom Events
+
+   C) Form Submit:
+   - Trigger Type: Custom Event
+   - Event Name: form_submit
+   - Fire On: All Custom Events
+
+4. CONFIGURAR VARIÁVEIS:
+
+   A) DataLayer Variables:
+   - booking_location
+   - booking_service
+   - contact_method
+   - form_name
+   - service_name
+   - scroll_percentage
+
+5. CONFIGURAR CONSENT:
+   - Enable Consent Overview
+   - Configure Built-in Variables
+   - Set up Consent Mode
+
+6. TESTAR:
+   - Use Preview Mode
+   - Teste todos os eventos
+   - Verifique Real-Time no GA4
+   - Confirme Facebook Events Manager
+
+EVENTOS PERSONALIZADOS DISPONÍVEIS:
+- booking_attempt (conversão principal)
+- phone_call (contacto)
+- form_submit (lead)
+- service_view (engagement)
+- scroll_depth (engagement)
+- time_on_page (engagement)
+- testimonial_interaction (engagement)
+- load_error (debugging)
+- performance_metric (performance)
+
+Para usar nos templates Hugo:
+onclick="tratamentesEvents.bookingAttempt('lisboa', 'massagem-relaxante')"
+onclick="tratamentesEvents.phoneCall('header')"
+onsubmit="tratamentesEvents.formSubmit('contacto', {name: 'João', email: 'joao@example.com'})"
+-->
+

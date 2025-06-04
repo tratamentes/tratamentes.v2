@@ -1,0 +1,214 @@
+{{/* RGPD Cookie Consent Banner */}}
+<div id="cookie-consent" class="cookie-consent" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description" style="display: none;">
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <h3 id="cookie-title">Utilizamos Cookies</h3>
+            <p id="cookie-description">
+                Este site utiliza cookies para melhorar a sua experiência de navegação e para fins analíticos. 
+                Pode aceitar todos os cookies ou gerir as suas preferências.
+            </p>
+        </div>
+        <div class="cookie-actions">
+            <button type="button" id="cookie-accept-all" class="btn btn-primary" aria-describedby="cookie-description">
+                Aceitar Todos
+            </button>
+            <button type="button" id="cookie-reject" class="btn btn-secondary" aria-describedby="cookie-description">
+                Rejeitar Não Essenciais
+            </button>
+            <button type="button" id="cookie-settings" class="btn btn-link" aria-describedby="cookie-description">
+                Gerir Preferências
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Preferências de Cookies -->
+<div id="cookie-preferences" class="cookie-modal" role="dialog" aria-labelledby="preferences-title" aria-hidden="true" style="display: none;">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content" role="document">
+        <div class="modal-header">
+            <h2 id="preferences-title">Preferências de Cookies</h2>
+            <button type="button" id="close-preferences" class="close-btn" aria-label="Fechar preferências">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="cookie-category">
+                <h3>Cookies Essenciais</h3>
+                <p>Necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+                <label class="cookie-toggle">
+                    <input type="checkbox" checked disabled aria-describedby="essential-desc">
+                    <span class="toggle-slider" aria-hidden="true"></span>
+                    <span class="sr-only" id="essential-desc">Cookies essenciais sempre ativos</span>
+                </label>
+            </div>
+            
+            <div class="cookie-category">
+                <h3>Cookies Analíticos</h3>
+                <p>Ajudam-nos a compreender como utiliza o site para melhorarmos a experiência.</p>
+                <label class="cookie-toggle">
+                    <input type="checkbox" id="analytics-cookies" aria-describedby="analytics-desc">
+                    <span class="toggle-slider" aria-hidden="true"></span>
+                    <span class="sr-only" id="analytics-desc">Ativar ou desativar cookies analíticos</span>
+                </label>
+            </div>
+            
+            <div class="cookie-category">
+                <h3>Cookies de Marketing</h3>
+                <p>Utilizados para mostrar anúncios relevantes e medir a eficácia das campanhas.</p>
+                <label class="cookie-toggle">
+                    <input type="checkbox" id="marketing-cookies" aria-describedby="marketing-desc">
+                    <span class="toggle-slider" aria-hidden="true"></span>
+                    <span class="sr-only" id="marketing-desc">Ativar ou desativar cookies de marketing</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="save-preferences" class="btn btn-primary">
+                Guardar Preferências
+            </button>
+            <button type="button" id="cancel-preferences" class="btn btn-secondary">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// RGPD Cookie Consent Management
+(function() {
+    'use strict';
+    
+    const COOKIE_NAME = 'tratamentes_cookie_consent';
+    const COOKIE_EXPIRY = 365; // dias
+    
+    // Verificar se já existe consentimento
+    function getCookieConsent() {
+        const consent = localStorage.getItem(COOKIE_NAME);
+        return consent ? JSON.parse(consent) : null;
+    }
+    
+    // Guardar consentimento
+    function setCookieConsent(preferences) {
+        const consent = {
+            timestamp: Date.now(),
+            preferences: preferences
+        };
+        localStorage.setItem(COOKIE_NAME, JSON.stringify(consent));
+        
+        // Definir cookie para o servidor
+        const expires = new Date();
+        expires.setDate(expires.getDate() + COOKIE_EXPIRY);
+        document.cookie = `${COOKIE_NAME}=true; expires=${expires.toUTCString()}; path=/; SameSite=Strict`;
+    }
+    
+    // Aplicar preferências
+    function applyPreferences(preferences) {
+        // GTM Events baseados no consentimento
+        if (window.gtmEvent) {
+            window.gtmEvent('cookie_consent', {
+                analytics: preferences.analytics,
+                marketing: preferences.marketing,
+                timestamp: Date.now()
+            });
+        }
+        
+        // Ativar/desativar tracking baseado no consentimento
+        if (preferences.analytics && window.gtag) {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
+        }
+        
+        if (preferences.marketing && window.gtag) {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted'
+            });
+        }
+    }
+    
+    // Mostrar banner
+    function showCookieBanner() {
+        const banner = document.getElementById('cookie-consent');
+        if (banner) {
+            banner.style.display = 'block';
+            banner.setAttribute('aria-hidden', 'false');
+            // Foco no primeiro botão para acessibilidade
+            setTimeout(() => {
+                const firstBtn = banner.querySelector('button');
+                if (firstBtn) firstBtn.focus();
+            }, 100);
+        }
+    }
+    
+    // Esconder banner
+    function hideCookieBanner() {
+        const banner = document.getElementById('cookie-consent');
+        if (banner) {
+            banner.style.display = 'none';
+            banner.setAttribute('aria-hidden', 'true');
+        }
+    }
+    
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        const consent = getCookieConsent();
+        
+        if (!consent) {
+            showCookieBanner();
+        } else {
+            applyPreferences(consent.preferences);
+        }
+        
+        // Aceitar todos
+        document.getElementById('cookie-accept-all')?.addEventListener('click', function() {
+            const preferences = {
+                essential: true,
+                analytics: true,
+                marketing: true
+            };
+            setCookieConsent(preferences);
+            applyPreferences(preferences);
+            hideCookieBanner();
+        });
+        
+        // Rejeitar não essenciais
+        document.getElementById('cookie-reject')?.addEventListener('click', function() {
+            const preferences = {
+                essential: true,
+                analytics: false,
+                marketing: false
+            };
+            setCookieConsent(preferences);
+            applyPreferences(preferences);
+            hideCookieBanner();
+        });
+        
+        // Mostrar preferências
+        document.getElementById('cookie-settings')?.addEventListener('click', function() {
+            document.getElementById('cookie-preferences').style.display = 'block';
+            document.getElementById('cookie-preferences').setAttribute('aria-hidden', 'false');
+        });
+        
+        // Fechar preferências
+        document.getElementById('close-preferences')?.addEventListener('click', function() {
+            document.getElementById('cookie-preferences').style.display = 'none';
+            document.getElementById('cookie-preferences').setAttribute('aria-hidden', 'true');
+        });
+        
+        // Guardar preferências
+        document.getElementById('save-preferences')?.addEventListener('click', function() {
+            const preferences = {
+                essential: true,
+                analytics: document.getElementById('analytics-cookies').checked,
+                marketing: document.getElementById('marketing-cookies').checked
+            };
+            setCookieConsent(preferences);
+            applyPreferences(preferences);
+            hideCookieBanner();
+            document.getElementById('cookie-preferences').style.display = 'none';
+        });
+    });
+})();
+</script>
+

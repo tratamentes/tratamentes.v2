@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="{{ .Site.Language.Lang }}" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
     
     <!-- SEO Meta Tags -->
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta name="keywords" content="massagem terapêutica, Lisboa, Cascais, dores nas costas, stress, João Goulart">
+    <meta name="keywords" content="massagem terapêutica, Lisboa, Cascais, dores costas, stress, ansiedade, João Goulart">
     <meta name="author" content="João Goulart - TrataMentes">
     
     <!-- Open Graph / Facebook -->
@@ -35,23 +35,44 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="/css/style.css" as="style">
-    <link rel="preload" href="/js/main.js" as="script">
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    
+    <!-- Fonts - WCAG 2.2 Compliant -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
     
-    <!-- Font Awesome (async) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Skip Link para acessibilidade -->
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 4px;
+        }
+        .skip-link:focus {
+            top: 6px;
+        }
+    </style>
     
-    <!-- Structured Data -->
+    <!-- Google Tag Manager - Sistema Principal -->
+    {{ partial "gtm-head.html" . }}
+    
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "TrataMentes - João Goulart",
+        "@type": "MedicalBusiness",
+        "name": "TrataMentes",
         "description": "{{ .Site.Params.description }}",
         "url": "{{ .Site.BaseURL }}",
         "telephone": "{{ .Site.Params.phone }}",
@@ -72,270 +93,34 @@
                 "addressCountry": "PT"
             }
         ],
-        "openingHours": "Mo-Fr 09:00-19:00",
         "priceRange": "€€",
-        "serviceType": "Massagem Terapêutica"
+        "medicalSpecialty": "Massage Therapy"
     }
     </script>
-    
-    <!-- Skip Link para Acessibilidade -->
-    <a href="#main-content" class="skip-link">Saltar para o conteúdo principal</a>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    {{ partial "gtm-body.html" . }}
+    
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo principal</a>
+    
     <!-- Header -->
     {{ partial "header.html" . }}
     
     <!-- Main Content -->
-    <main id="main-content" role="main">
+    <main id="main-content" role="main" tabindex="-1">
         {{ block "main" . }}{{ end }}
     </main>
     
     <!-- Footer -->
     {{ partial "footer.html" . }}
     
-    <!-- Modal de Agendamento BUK -->
-    <div id="modalAgendamento" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-        <div class="modal-background" aria-label="Fechar modal"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <h2 id="modal-title" class="modal-card-title">Agendar Consulta</h2>
-                <button class="delete" aria-label="Fechar modal de agendamento" onclick="closeBookingModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </header>
-            <section class="modal-card-body" style="height: 70vh; padding: 0;">
-                <div id="loadingSpinner" class="has-text-centered p-5" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-                    <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #2C5F63; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                    <p style="margin-top: 1rem; color: #666;">A carregar sistema de agendamento...</p>
-                </div>
-                <iframe 
-                    id="frameAgendamento" 
-                    src="" 
-                    style="width: 100%; height: 100%; border: none; display: none;"
-                    title="Sistema de Agendamento BUK"
-                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-                </iframe>
-            </section>
-        </div>
-    </div>
-    
-    <!-- CSS para o spinner -->
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 1rem;
-        }
-        
-        .modal.is-active {
-            display: flex;
-        }
-        
-        .modal-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            cursor: pointer;
-        }
-        
-        .modal-card {
-            background: white;
-            border-radius: 8px;
-            max-width: 90vw;
-            max-height: 90vh;
-            width: 900px;
-            height: 700px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .modal-card-head {
-            padding: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f9fa;
-            border-radius: 8px 8px 0 0;
-        }
-        
-        .modal-card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 0;
-            color: #2C5F63;
-        }
-        
-        .delete {
-            background: none;
-            border: 2px solid #ccc;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-        
-        .delete:hover,
-        .delete:focus {
-            border-color: #dc3545;
-            background-color: #dc3545;
-            color: white;
-        }
-        
-        .modal-card-body {
-            flex: 1;
-            padding: 0;
-            overflow: hidden;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        /* Responsividade do modal */
-        @media (max-width: 768px) {
-            .modal-card {
-                width: 95vw;
-                height: 85vh;
-                margin: 0;
-            }
-            
-            .modal {
-                padding: 0.5rem;
-            }
-        }
-        
-        /* Prevenção de scroll no body quando modal está aberto */
-        body.modal-open {
-            overflow: hidden;
-        }
-    </style>
-    
-    <!-- JavaScript Principal -->
+    <!-- JavaScript -->
     <script src="/js/main.js" defer></script>
     
-    <!-- JavaScript para Modal BUK -->
-    <script>
-        // Função global para abrir modal (chamada pelos botões)
-        function openBookingModal(location = '', service = '') {
-            const modal = document.getElementById('modalAgendamento');
-            const iframe = document.getElementById('frameAgendamento');
-            const spinner = document.getElementById('loadingSpinner');
-            
-            if (!modal || !iframe) return;
-            
-            // Mostrar spinner
-            spinner.style.display = 'flex';
-            iframe.style.display = 'none';
-            
-            // URL base do BUK
-            let bookingUrl = 'https://buk.pt/tratamentes?embed=true';
-            
-            // Adicionar parâmetros se fornecidos
-            const params = [];
-            if (location) params.push(`localizacao=${encodeURIComponent(location)}`);
-            if (service) params.push(`servico=${encodeURIComponent(service)}`);
-            
-            if (params.length > 0) {
-                bookingUrl += '&' + params.join('&');
-            }
-            
-            // Configurar iframe
-            iframe.src = bookingUrl;
-            
-            // Mostrar modal
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('modal-open');
-            
-            // Animar entrada
-            requestAnimationFrame(() => {
-                modal.classList.add('is-active');
-            });
-            
-            // Quando iframe carregar
-            iframe.onload = function() {
-                spinner.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.focus();
-            };
-            
-            // Fallback se iframe não carregar em 10 segundos
-            setTimeout(() => {
-                if (spinner.style.display !== 'none') {
-                    spinner.innerHTML = '<p style="color: #dc3545;">Erro ao carregar. <a href="https://buk.pt/tratamentes" target="_blank" style="color: #2C5F63;">Abrir em nova janela</a></p>';
-                }
-            }, 10000);
-        }
-        
-        // Função global para fechar modal
-        function closeBookingModal() {
-            const modal = document.getElementById('modalAgendamento');
-            const iframe = document.getElementById('frameAgendamento');
-            
-            if (!modal) return;
-            
-            modal.classList.remove('is-active');
-            modal.setAttribute('aria-hidden', 'true');
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open');
-                if (iframe) iframe.src = '';
-            }, 300);
-        }
-        
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fechar modal ao clicar no fundo
-            const modal = document.getElementById('modalAgendamento');
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('modal-background')) {
-                        closeBookingModal();
-                    }
-                });
-            }
-            
-            // Fechar modal com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeBookingModal();
-                }
-            });
-            
-            // Adicionar event listeners aos botões de agendamento
-            document.querySelectorAll('.btn-agendamento, .button[href*="agendar"], a[href*="agendar"]').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const location = this.getAttribute('data-location') || '';
-                    const service = this.getAttribute('data-service') || '';
-                    openBookingModal(location, service);
-                });
-            });
-        });
-    </script>
+    <!-- RGPD Cookie Consent -->
+    {{ partial "cookie-consent.html" . }}
 </body>
 </html>
 
