@@ -1,42 +1,143 @@
-﻿{{ define "main" }}
-<section class='hero'>
-  <div class='container'>
-    <div class='hero-content'>
-      <h1>{{ .Title }}</h1>
-      <p class='hero-subtitle'>{{ .Params.subtitle }}</p>
-      <div class='hero-cta'>
-        <a href='/contacto/' class='btn btn-primary'>Agendar Consulta</a>
-        <a href='tel:{{ .Site.Params.phone }}' class='btn btn-secondary'>Ligar Agora</a>
-      </div>
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ .Title }}</h1>
+            <p class="hero-subtitle">{{ .Params.subtitle }}</p>
+            <div class="hero-cta">
+                <a href="/contacto/" class="btn btn-primary">Agendar Consulta</a>
+                <a href="tel:{{ .Site.Params.phone }}" class="btn btn-secondary">
+                    <span class="btn-icon">📞</span>
+                    Ligar Agora
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<section class='problems'>
-  <div class='container'>
-    <h2>Reconhece Alguma Destas Situações?</h2>
-    <div class='problems-grid'>
-      <div class='problem-card'>
-        <h3> Dores nas Costas</h3>
-        <p>Acorda rígido e demora tempo a "desenferrujar"?</p>
-      </div>
-      <div class='problem-card'>
-        <h3> Stress Constante</h3>
-        <p>Sente os ombros sempre tensos?</p>
-      </div>
-      <div class='problem-card'>
-        <h3> Noites Mal Dormidas</h3>
-        <p>Não consegue relaxar completamente?</p>
-      </div>
+<!-- Problems Section -->
+<section class="problems">
+    <div class="container">
+        <h2 class="section-title">Reconhece Alguma Destas Situações?</h2>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="problem-icon">🔸</div>
+                <h3>Dores nas Costas</h3>
+                <p>Acorda rígido e demora tempo a "desenferrujar"? Sente desconforto ao estar muito tempo sentado?</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🔸</div>
+                <h3>Stress Constante</h3>
+                <p>Sente os ombros sempre tensos? Tem dificuldade em relaxar mesmo nos momentos de descanso?</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🔸</div>
+                <h3>Noites Mal Dormidas</h3>
+                <p>Não consegue relaxar completamente? Acorda cansado mesmo depois de dormir?</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<section class='cta-section'>
-  <div class='container'>
-    <h2>Pronto para Viver Sem Dores?</h2>
-    <p>Consulta inicial gratuita e sem compromisso</p>
-    <a href='/contacto/' class='btn btn-accent'>Agendar Agora</a>
-  </div>
+<!-- Solution Section -->
+<section class="solution">
+    <div class="container">
+        <div class="solution-content">
+            <div class="solution-text">
+                <h2>Mais de 20 Anos de Experiência</h2>
+                <p>Sou João Goulart, terapeuta especializado em massagem terapêutica. Ao longo de duas décadas, 
+                ajudei centenas de pessoas em Lisboa e Cascais a encontrar alívio natural para dores crónicas, 
+                stress e problemas de sono.</p>
+                
+                <div class="solution-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Avaliação personalizada em cada consulta</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Técnicas adaptadas às suas necessidades específicas</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Ambiente profissional e acolhedor</span>
+                    </div>
+                </div>
+                
+                <a href="/sobre/" class="btn btn-outline">Conhecer Melhor</a>
+            </div>
+            <div class="solution-image">
+                <img src="/images/joao-goulart-terapeuta.jpg" alt="João Goulart - Terapeuta de Massagem" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview -->
+<section class="services-preview">
+    <div class="container">
+        <h2 class="section-title">Como Posso Ajudá-lo?</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Dores nas Costas e Pescoço</h3>
+                <p>Técnicas específicas para alívio de tensões musculares e melhoria da postura.</p>
+                <a href="/servicos/dores-costas-pescoco/" class="service-link">Saber Mais →</a>
+            </div>
+            <div class="service-card">
+                <h3>Stress e Tensão Muscular</h3>
+                <p>Relaxamento profundo para reduzir o stress e promover o bem-estar geral.</p>
+                <a href="/servicos/stress-tensao/" class="service-link">Saber Mais →</a>
+            </div>
+            <div class="service-card">
+                <h3>Problemas de Sono</h3>
+                <p>Técnicas de relaxamento que promovem um sono mais reparador e tranquilo.</p>
+                <a href="/servicos/sono-relaxamento/" class="service-link">Saber Mais →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Locations Section -->
+<section class="locations">
+    <div class="container">
+        <h2 class="section-title">Localizações</h2>
+        <div class="locations-grid">
+            <div class="location-card">
+                <h3>{{ .Site.Params.locations.lisboa.name }}</h3>
+                <p class="location-address">{{ .Site.Params.locations.lisboa.address }}</p>
+                <p class="location-phone">
+                    <span class="contact-icon">📞</span>
+                    <a href="tel:{{ .Site.Params.locations.lisboa.phone }}">{{ .Site.Params.locations.lisboa.phone }}</a>
+                </p>
+            </div>
+            <div class="location-card">
+                <h3>{{ .Site.Params.locations.cascais.name }}</h3>
+                <p class="location-address">{{ .Site.Params.locations.cascais.address }}</p>
+                <p class="location-phone">
+                    <span class="contact-icon">📞</span>
+                    <a href="tel:{{ .Site.Params.locations.cascais.phone }}">{{ .Site.Params.locations.cascais.phone }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Pronto para Viver com Menos Dores?</h2>
+            <p>Consulta inicial para avaliação das suas necessidades específicas</p>
+            <div class="cta-buttons">
+                <a href="/contacto/" class="btn btn-primary btn-large">Agendar Consulta</a>
+                <a href="tel:{{ .Site.Params.phone }}" class="btn btn-secondary btn-large">
+                    <span class="btn-icon">📞</span>
+                    {{ .Site.Params.phone }}
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 {{ end }}
+

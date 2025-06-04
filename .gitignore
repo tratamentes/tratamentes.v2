@@ -1,4 +1,4 @@
-﻿# Hugo
+# Hugo
 /public/
 /resources/
 .hugo_build.lock
@@ -17,3 +17,11 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Node modules (se usar npm/yarn)
+node_modules/
+
+# Backup files
+*.bak
+*~
+

@@ -1,52 +1,62 @@
-baseURL = 'https://tratamentes.pt'
-defaultContentLanguage = 'pt'
+baseURL = "https://tratamentes.pt"
+languageCode = "pt-PT"
+title = "TrataMentes - Massagem Terapêutica Lisboa e Cascais"
+theme = "tratamentes"
+
+# Configurações básicas
+defaultContentLanguage = "pt"
 defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+enableGitInfo = false
 
-[languages]
-  [languages.pt]
-    languageName = 'Português'
-    weight = 1
-    title = 'TrataMentes - Massagem Terapêutica Lisboa e Cascais'
-    [languages.pt.params]
-      description = 'Massagem terapêutica profissional em Lisboa e Cascais. Mais de 20 anos de experiência.'
-      phone = '+351 937 543 312'
-      email = 'contato@tratamentes.pt'
-    [[languages.pt.menu.main]]
-      name = 'Início'
-      url = '/'
-      weight = 1
-    [[languages.pt.menu.main]]
-      name = 'Sobre'
-      url = '/sobre/'
-      weight = 2
-    [[languages.pt.menu.main]]
-      name = 'Serviços'
-      url = '/servicos/'
-      weight = 3
-    [[languages.pt.menu.main]]
-      name = 'Contacto'
-      url = '/contacto/'
-      weight = 4
+# Parâmetros do site
+[params]
+  description = "Massagem terapêutica profissional em Lisboa e Cascais. Mais de 20 anos de experiência no alívio de dores e stress."
+  keywords = "massagem terapêutica, Lisboa, Cascais, dores nas costas, stress, relaxamento"
+  phone = "+351 937 543 312"
+  email = "contato@tratamentes.pt"
+  
+  # Localizações
+  [params.locations]
+    [params.locations.lisboa]
+      name = "WLM - Clínica de Medicina Integrativa"
+      address = "R. Braamcamp 88 3Esq, 1250-012 Lisboa"
+      phone = "+351 937 543 312"
+    [params.locations.cascais]
+      name = "Clinica Now - Gabinete João Goulart"
+      address = "Av. Eng. Adelino Amaro da Costa 599 A, 2750-279 Cascais"
+      phone = "+351 937 543 312"
 
-  [languages.en]
-    languageName = 'English'
-    weight = 2
-    title = 'TrataMentes - Therapeutic Massage Lisbon and Cascais'
-    [languages.en.params]
-      description = 'Professional therapeutic massage in Lisbon and Cascais. Over 20 years of experience.'
-    [[languages.en.menu.main]]
-      name = 'Home'
-      url = '/en/'
-      weight = 1
-    [[languages.en.menu.main]]
-      name = 'About'
-      url = '/en/about/'
-      weight = 2
-    [[languages.en.menu.main]]
-      name = 'Services'
-      url = '/en/services/'
-      weight = 3
-    [[languages.en.menu.main]]
-      name = 'Contact'
-      url = '/en/contact/'
-      weight = 4
+# Menu principal
+[[menu.main]]
+  name = "Início"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Sobre"
+  url = "/sobre/"
+  weight = 2
+
+[[menu.main]]
+  name = "Serviços"
+  url = "/servicos/"
+  weight = 3
+
+[[menu.main]]
+  name = "Contacto"
+  url = "/contacto/"
+  weight = 4
+
+# Configurações de markup
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Configurações de minificação
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+

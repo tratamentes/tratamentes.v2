@@ -1,23 +1,37 @@
-﻿<header class='header'>
-  <nav class='navbar'>
-    <div class='container'>
-      <a href='{{ .Site.Home.RelPermalink }}' class='brand'>
-        {{ .Site.Title }}
-      </a>
-      
-      <div class='nav-menu'>
-        {{ range .Site.Menus.main }}
-          <a href='{{ .URL }}' class='nav-link'>{{ .Name }}</a>
-        {{ end }}
-        
-        <div class='language-selector'>
-          {{ range .Site.Languages }}
-            {{ if ne .Lang $.Site.Language.Lang }}
-              <a href='{{ if eq .Lang $.Site.DefaultContentLanguage }}/{{ else }}/{{ .Lang }}/{{ end }}'>{{ .LanguageName }}</a>
-            {{ end }}
-          {{ end }}
+<header class="header">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{{ .Site.Home.RelPermalink }}" class="brand-link">
+                    <span class="brand-text">{{ .Site.Title }}</span>
+                </a>
+            </div>
+            
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="navbar-menu" id="navbar-menu">
+                <ul class="navbar-nav">
+                    {{ range .Site.Menus.main }}
+                    <li class="nav-item">
+                        <a href="{{ .URL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+                
+                <div class="navbar-cta">
+                    <a href="tel:{{ .Site.Params.phone }}" class="btn btn-outline">
+                        <span class="btn-icon">📞</span>
+                        Ligar Agora
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 </header>
+
